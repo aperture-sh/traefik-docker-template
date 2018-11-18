@@ -1,0 +1,29 @@
+debug = false
+
+logLevel = "WARN"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "databio-np.igd.fraunhofer.de"
+watch = true
+exposedByDefault = false
+
+[acme]
+email = "florian.zouhar@igd.fraunhofer.de"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
